@@ -1,0 +1,34 @@
+import AddTodoForm from './components/AddTodoForm'
+import TodoList from './components/TodoList'
+import TodoSummary from './components/TodoSummary'
+import useTodos from '../hooks/useTodos'
+
+function App() {
+  const {
+    todos,
+    setTodoCompleted,
+    addTodo,
+    deleteTodo,
+    deleteAllCompleted
+  } = useTodos();
+  
+  return (
+    <main className="py-10 bg-red-50 h-screen" space-y-5>
+      <h1 className="font-bold text-3xl text-center">Your Task for today!</h1>
+      <div className="max-w-lg bg-slate-100 rounded-md p-5 mx-auto space-y-6">
+        <AddTodoForm onSubmit={addTodo}/>
+        <TodoList
+          todos={todos} 
+          onCompletedChange={setTodoCompleted} 
+          onDelete={deleteTodo} 
+        />
+      </div>
+      <TodoSummary 
+        todos={todos}
+        deleteAllCompleted={deleteAllCompleted}
+      />
+    </main>
+  )
+}
+
+export default App
